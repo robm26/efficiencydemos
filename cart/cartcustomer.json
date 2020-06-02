@@ -1,0 +1,14 @@
+{
+  "ShoppingCart": {
+    "Keys": [
+      {
+        "PK": {"S": "Cart3"},
+        "SK": {"S": "Product300"}
+      },
+      {
+        "PK": {"S": "Customer"},
+        "SK": {"S": "John Stiles"}
+      }
+    ]
+  }
+}
