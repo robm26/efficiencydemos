@@ -22,8 +22,7 @@ and get immediate visibility into the cost and effectiveness of your calls.
 ## Scenario
 
 We are consultants who have been hired to build a shopping cart for an E-commerce website.
-Each cart that is created has a unique ID, such as Cart1 or Cart2.  
-Within each cart, one or many products can exist.  
+Each cart that is created has a unique ID, such as Cart1 or Cart2. Within each cart, one or many products can exist.  
 Each product is identified via IDs such as Product100, Product200, etc.
 A one-to-many pattern of cart to products is modeled in a DynamoDB table called **ShoppingCart**.
 
@@ -32,11 +31,12 @@ A one-to-many pattern of cart to products is modeled in a DynamoDB table called 
 This table also contains other types of items, such as Customer details and Product details.
 The Description attribute for many of these items is a large string of 20,000 bytes, representing a typical JSON document payload.
 
-![Product100](https://dynamodb-images.s3.amazonaws.com/img/product100.png)
-
 ![Customer](https://dynamodb-images.s3.amazonaws.com/img/customer.png)
 
-We will take a tour of the DynamoDB read and write operations using simple shell scripts that call the AWS CLI.
+![Product100](https://dynamodb-images.s3.amazonaws.com/img/product100.png)
+
+
+We will take a tour of the DynamoDB read and write operations using simple shell scripts that access this table.
 
 ## Consumed Capacity
 
@@ -45,17 +45,13 @@ We will take a tour of the DynamoDB read and write operations using simple shell
 A nice feature of calls to DynamoDB is that you can request a summary of the capacity consumed by your call.
 Even if your call is only sending or receiving a small amount of data, it may be consuming a much larger amount of Read Capacity or Write Capacity.
 
-Capacity is measured in Read Capacity Units and Write Capacity Units (RCUs and WCUs).
-Each RCU represents the size of data read, rounded up to the nearest 4 KB unit. 
-Each WCU represents the size of data written, rounded up to the nearest 1 KB unit.
-
-Be aware that these capacity units are measured according to how much data DynamoDB reads and writes internally, which may be more than is actually sent or received by the client.
+Capacity is measured in Read Units and Write Units (sometimes called RCUs and WCUs).
+Each read unit represents the size of data read, measured in 4 KB units. Each write unit represents the size of data written measured in 1 KB units.  Your actual consumption is rounded up to the nearest unit.
 
 Data operations to DynamoDB have an optional "Return Consumed Capacity" parameter, where you can specify either TOTAL or INDEXES.   Specifying INDEXES will provide a total along with a breakdown of capacity consumed by indexes.
 
 For reads, you will also see two counts returned, the Scanned Count and the Returned Count.
 The Scanned Count is the total number of Items (rows) read by the DynamoDB engine, while the Returned Count is the number returned to the user.
-
 
 
 ## Setup Steps
@@ -101,7 +97,13 @@ As you run each example, try and estimate the capacity you think will be consume
 | Get Item from GSI | *N/A <br/> you can only get item from base table!* |
 
 
+
 ## Next Steps
+The table you created has 17 items and a size of 282 KB.  It was created in **On Demand** capacity mode.
+The [pricing page for DynamoDB](https://aws.amazon.com/dynamodb/pricing/) shows that you enjoy 25GB of free-tier storage for your tables.
+On On Demand mode, you are billed one penny for each 40,000 read units or 8000 write units consumed.
+You can delete your table if desired.
+
 
 Please contribute to this code sample by issuing a Pull Request or creating an Issue.
 
