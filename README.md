@@ -23,7 +23,7 @@ and get immediate visibility into the cost and effectiveness of your calls.
  
 ## Consumed Capacity
 
-![Consumed Capacity](https://dynamodb-images.s3.amazonaws.com/img/consumed.png)
+![Consumed Capacity](https://dynamodb-images.s3.amazonaws.com/img/consumed_grey.png)
 
 A nice feature of calls to DynamoDB is that you can request a summary of the capacity consumed by your call.
 Even if your call is only sending or receiving a small amount of data, it may be consuming a much larger amount of Read Capacity or Write Capacity.
