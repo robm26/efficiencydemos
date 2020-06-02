@@ -1,0 +1,210 @@
+{
+  "ModelName": "report_mgmt",
+  "ModelMetadata": {
+    "Author": "pnnaylor@",
+    "DateCreated": "May 30, 2020, 03:25 PM",
+    "DateLastModified": "May 30, 2020, 03:41 PM",
+    "Description": "",
+    "Version": "1.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "reports",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "ReportID",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "ReportDetails",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "OwnerID",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Summary",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Status#Date",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Document",
+          "AttributeType": "S"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "StatusDate-by-OwnerID",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "OwnerID",
+              "AttributeType": "S"
+            },
+            "SortKey": {
+              "AttributeName": "Status#Date",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "INCLUDE",
+            "NonKeyAttributes": [
+              "Summary",
+              "ReportID"
+            ]
+          }
+        }
+      ],
+      "TableData": [
+        {
+          "ReportID": {
+            "S": "AFED"
+          },
+          "ReportDetails": {
+            "S": "AFED#meta"
+          },
+          "OwnerID": {
+            "S": "Paola"
+          },
+          "Summary": {
+            "S": "{Summary: \"Descriptive Line\"}"
+          },
+          "Status#Date": {
+            "S": "Pending#2019-10-02"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "AFED"
+          },
+          "ReportDetails": {
+            "S": "AFED#report"
+          },
+          "Document": {
+            "S": "{Data: Blob, Goes: Here}"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "3KF8"
+          },
+          "ReportDetails": {
+            "S": "3KF8#meta"
+          },
+          "OwnerID": {
+            "S": "Mike"
+          },
+          "Summary": {
+            "S": "{Summary: \"Descriptive Line\"}"
+          },
+          "Status#Date": {
+            "S": "Processed#2019-10-03"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "3KF8"
+          },
+          "ReportDetails": {
+            "S": "3KF8#report"
+          },
+          "Document": {
+            "S": "{Data: Blob, Goes: Here}"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "9D2B"
+          },
+          "ReportDetails": {
+            "S": "9D2B#meta"
+          },
+          "OwnerID": {
+            "S": "Paola"
+          },
+          "Summary": {
+            "S": "{Summary: \"Descriptive Line\"}"
+          },
+          "Status#Date": {
+            "S": "Pending#2019-10-04"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "9D2B"
+          },
+          "ReportDetails": {
+            "S": "9D2B#report"
+          },
+          "Document": {
+            "S": "{Data: Blob, Goes: Here}"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "CT7R"
+          },
+          "ReportDetails": {
+            "S": "CT7R#meta"
+          },
+          "OwnerID": {
+            "S": "Robert"
+          },
+          "Summary": {
+            "S": "{Summary: \"Descriptive Line\"}"
+          },
+          "Status#Date": {
+            "S": "Pending#2019-10-04"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "CT7R"
+          },
+          "ReportDetails": {
+            "S": "CT7R#report"
+          },
+          "Document": {
+            "S": "{Data: Blob, Goes: Here}"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "ZH2F"
+          },
+          "ReportDetails": {
+            "S": "ZH2F#meta"
+          },
+          "OwnerID": {
+            "S": "Paola"
+          },
+          "Summary": {
+            "S": "{Summary: \"Descriptive Line\"}"
+          },
+          "Status#Date": {
+            "S": "Processed#2019-10-01"
+          }
+        },
+        {
+          "ReportID": {
+            "S": "ZH2F"
+          },
+          "ReportDetails": {
+            "S": "ZH2F#report"
+          },
+          "Document": {
+            "S": "{Data: Blob, Goes: Here}"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    }
+  ]
+}
