@@ -112,6 +112,11 @@ This is a view of the Global Secondary Index: **StatusDate-by-OwnerID**
 1. Import model [report_mgmt.json](./reportmgmt/report_mgmt.json) into NoSQL Workbench for Amazon DynamoDB.
 2. Use NoSQL Workbench Visualizer to "commit" the model to your AWS account in *us-east-1*.
 
+*This table is created with Provisioned Capacity mode, with 5 read and 5 write units.
+You have 25 such units free across all your tables.  If you will be keeping the table around, 
+consider switching into On-Demand mode from the Capacity tab in your DynamoDB console.  
+See further pricing notes at the bottom.*
+
 ### Report Management Demo
 1. View the model and example data.
 2. Run the script to update the status and date for one of the entries:
