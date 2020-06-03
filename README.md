@@ -87,8 +87,8 @@ As you run each example, try and estimate the capacity you think will be consume
 | BatchGetItem | ```batchget.sh``` |
 | Query | ```query.sh Cart1``` |
 | Query with Filter | ```queryfilter.sh Cart1 Orange``` |
-| Query with Sort Key Expression | ```queryfilter.sh Cart1 Product400``` |
-| Delete Item | ```delete.sh Cart1 Product500``` |
+| Query with Sort Key Expression | ```querysortkey.sh Cart1 Product400``` |
+| Delete Item | ```delete.sh Cart1 Product400``` |
 | Put Item | ```put.sh``` <br/> *writes new item Cart7 Product700* |
 | UpdateItem | 1. ```update.sh Cart7 Product700 Price 22.33``` <br/> 2. ```update.sh Cart7 Product700 CustomerDescription MuchSmaller``` <br/> 3. ```update.sh Cart7 Product700 Price 44.55``` |
 | Add New GSI (ProductName + Price) | ```addgsi.sh``` <br/> Wait a couple minutes for **GSI-ProductPrice** to be created. |
