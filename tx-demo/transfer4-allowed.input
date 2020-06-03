@@ -1,0 +1,39 @@
+[
+    {
+        "Update": {
+            "Key": {
+                "acct": {"N": "12345"}
+            },
+            "UpdateExpression": "SET bal = bal - :take",
+            "ExpressionAttributeValues": {
+                ":take": {"N": "42.42"}
+            },
+            "TableName": "Accounts",
+            "ConditionExpression": "bal >= :take"
+        }
+    },
+    {
+        "Update": {
+            "Key": {
+                "acct": {"N": "54321"}
+            },
+            "UpdateExpression": "SET bal = bal + :give",
+            "ExpressionAttributeValues": {
+                ":give": {"N": "42.42"}
+            },
+            "TableName": "Accounts",
+            "ConditionExpression": "attribute_exists(acct)"
+        }
+    },
+    {
+        "Put": {
+            "Item": {
+                "txid": {"S":"e896d9e5-818c-43b2-a139-59fd63fbcd12"}, 
+                "time": {"N":"1590988629"}, 
+                "desc": {"S":"$42.42 from 12345 to 54321"}
+            },
+            "TableName": "Transactions",
+            "ConditionExpression": "attribute_not_exists(txid)"
+        }
+    }
+]

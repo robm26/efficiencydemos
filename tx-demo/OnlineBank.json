@@ -1,0 +1,83 @@
+{
+  "ModelName": "OnlineBank",
+  "ModelMetadata": {
+    "Author": "pnnaylor@",
+    "DateCreated": "May 31, 2020, 07:48 PM",
+    "DateLastModified": "Jun 02, 2020, 07:09 AM",
+    "Description": "",
+    "Version": "1.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "Accounts",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "acct",
+          "AttributeType": "N"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "bal",
+          "AttributeType": "N"
+        }
+      ],
+      "TableData": [
+        {
+          "acct": {
+            "N": "12345"
+          },
+          "bal": {
+            "N": "543.55"
+          }
+        },
+        {
+          "acct": {
+            "N": "54321"
+          },
+          "bal": {
+            "N": "228.42"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    },
+    {
+      "TableName": "Transactions",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "txid",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "time",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "desc",
+          "AttributeType": "S"
+        }
+      ],
+      "TableData": [
+        {
+          "txid": {
+            "S": "7d622075-f2f1-4dd4-8aaf-fb29e87c2b9a"
+          },
+          "time": {
+            "N": "1590987629"
+          },
+          "desc": {
+            "S": "$73.00 from 12345 to 54321"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    }
+  ]
+}
