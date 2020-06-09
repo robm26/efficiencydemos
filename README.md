@@ -118,8 +118,9 @@ consider switching into On-Demand mode from the Capacity tab in your DynamoDB co
 See further pricing notes at the bottom.*
 
 ### Report Management Demo
-1. View the model and example data.
-2. Run the script to update the status and date for one of the entries:
+1. cd into the [reportmgmt](./reportmgmt/) folder.
+2. View the model and example data.
+3. Run this script to update the status and date for one of the entries:
 ```
 update_report_statusdate.sh 9D2B 9D2B#meta Pending#2019-10-05
 ```
@@ -131,6 +132,79 @@ update_report_statusdate.sh 9D2B 9D2B#meta Pending#2019-10-05
 query_gsi_by_owner_status_sortdate.sh Paola Pending
 ```
 Note sorted result set and read throughput consumption reported.
+
+## Scenario 3 - Transactions
+1. Navigate to the project's *tx* folder.
+2. Import model [OnlineBank.json](./tx/OnlineBank.json) into NoSQL Workbench for Amazon DynamoDB.
+3. Use NoSQL Workbench Visualizer to "commit" the model to your AWS account in *us-east-1*.
+
+You now have two tables called *Accounts* and *Transactions*.
+
+Scan the tables to look at the existing data - accounts with balances, and a transaction
+recorded already.
+
+### Transactions Demo
+1.  Perform a transfer.  
+
+ ```balance_transfer.sh c3e67497-fcb0-4881-8477-b0cbedab7240 transfer1-allowed```
+
+This succeeds - all conditions are met.  Notice the consumed writes, and re-scan the tables to see the new and changed items.
+
+
+2.  Attempt a transfer where the payer has insufficient funds.
+
+```balance_transfer.sh 4510ba8a-518b-4701-88b5-3db78e618f71 transfer2-underfunded```
+
+This fails - the condition is not met on the first action, which is to verify
+adequate funding in the source account.  Writes are consumed anyway.
+
+3.  Attempt the same transfer again using the same idempotency key.
+
+```balance_transfer.sh 4510ba8a-518b-4701-88b5-3db78e618f71 transfer2-underfunded```
+
+Because the prior attempt failed due to a condition exception, the idempotency
+token is not tracked by DynamoDB.  We try again, get the same exception, and
+we consume the same writes.
+
+4.  Attempt a transaction that uses a *txid* that was used in the past
+
+```balance_transfer.sh 7d622075-f2f1-4dd4-8aaf-fb29e87c2b9a transfer3-txidused```
+
+Now we try to make a transfer with a **txid** which matches the one that was
+already recorded some time ago - it was in our initial sample data.  This fails
+because the third condition is not matched - that every new transaction must
+have its own unique txid.  This consumes writes.  
+The validation check against historical use of *txid* was part of our application business logic, 
+and did not involve the idempotency token.  Idempotency tokens are only tracked for around 10 mins).
+
+
+5.  Perform a successful transfer, while using an idempotency token.
+
+```balance_transfer.sh e896d9e5-818c-43b2-a139-59fd63fbcd12 transfer4-allowed```
+
+This is a successful transfer - see the writes consumed, balances updated
+and new transaction recorded.  But what if our client never received the 200
+response from DynamoDB saying the transaction was committed?  It must retry, which could
+be a problem - the exception would be raised due to seeing an existing *txid*,
+preventing a repeat transfer, but to the client it still seems like a fail.
+No way to know if this is because of retry in the short term or if this is a
+genuine *txid* clash from separate balance transfer requests.  This sounds messy.
+
+
+6.  Repeat the transfer
+
+```balance_transfer.sh e896d9e5-818c-43b2-a139-59fd63fbcd12 transfer4-allowed```
+
+Thankfully, if we retry within 10 minutes, DynamoDB will return a successful
+response code to the client, so it knows it actually succeeded. The
+transfer is not actually made again; no updates are made to the account balances and
+the transaction is not recorded again.  You'll notice that capacity was
+consumed - but look carefully.  It is read units.  No writes were made,
+but read units are consumed in checking and confirming that the transaction was
+in fact already successfully committed.  This adds a great deal of resilience
+and integrity.  Clients can retry and ascertain the exact status of any
+transaction.
+
 
 
 ## Next Steps
