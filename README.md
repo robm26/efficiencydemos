@@ -71,6 +71,17 @@ and ```aws dynamodb describe-limits```.  You should see no errors.
 1. Run ```recreate.sh``` to create your table.  Please ignore the ResourceNotFoundException that appears the first time, as it attempts to delete the table should it already exist.
 1. Run ```node load``` which will write the data to your new **ShoppingCart** table from the [CartData.csv](./cart/CartData.csv) file.
 
+*If you don't have Node.JS, you may use the NoSQL Workbench to deploy this table using the provided [ShoppingCart.json](./cart/ShoppingCart.json) file.*
+
+#### Return Consumed Capacity
+1. Review the rest of the shell scripts in this [/cart](./cart/) folder.
+1. Open the [scan.sh](./cart/scan.sh) script in your text editor.
+1. Notice the final four lines.  We include the option ```--return-consumed-capacity 'TOTAL'``` to request additional information about the cost of our operation.
+
+The AWS CLI offers it's own ```--query``` utility to do a final client-side format of the data returned by your DynamoDB API calls.
+We have chosen to comment out the display of actual returned ```Items[*]``` array of data, instead focusing on three consumed capacity stats.
+*Learn more about the AWS CLI data formatting options via the [CLI Documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-output.html).*
+
 ### Shopping Cart Demo
 
 This sequence of commands helps illustrate the pros and cons of various access patterns.
@@ -205,6 +216,12 @@ in fact already successfully committed.  This adds a great deal of resilience
 and integrity.  Clients can retry and ascertain the exact status of any
 transaction.
 
+
+## Modeling Exercises
+To practice modeling DynamoDB tables using the NoSQL Workbench, 
+please try the design challenges at:
+ 
+ * [amazon-dynamodb-labs.com](https://amazon-dynamodb-labs.com/scenarios.html)
 
 
 ## Next Steps
