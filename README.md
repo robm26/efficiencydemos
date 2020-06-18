@@ -113,38 +113,9 @@ As you run each example, try and estimate the capacity you think will be consume
 
 
 
-## Scenario 2 - Report Management
+---
 
-![GSI: StatusDate-by-OwnerID](https://dynamodb-images.s3.amazonaws.com/img/reports_gsi.png)
-
-This is a view of the Global Secondary Index: **StatusDate-by-OwnerID**
-
-### Setup Steps
-1. Import model [report_mgmt.json](./reportmgmt/report_mgmt.json) into NoSQL Workbench for Amazon DynamoDB.
-2. Use NoSQL Workbench Visualizer to "commit" the model to your AWS account in *us-east-1*.
-
-*This table is created with Provisioned Capacity mode, with 5 read and 5 write units.
-You have 25 such units free across all your tables.  If you will be keeping the table around, 
-consider switching into On-Demand mode from the Capacity tab in your DynamoDB console.  
-See further pricing notes at the bottom.*
-
-### Report Management Demo
-1. cd into the [reportmgmt](./reportmgmt/) folder.
-2. View the model and example data.
-3. Run this script to update the status and date for one of the entries:
-```
-update_report_statusdate.sh 9D2B 9D2B#meta Pending#2019-10-05
-```
-   Note write throughput consumed - why did the secondary index consume 2 ?
-   
-3. Run this script to selectively Query the global secondary index retrieving
-   matches for a particular OwnerID and Status, and return in sort Date order.
-```
-query_gsi_by_owner_status_sortdate.sh Paola Pending
-```
-Note sorted result set and read throughput consumption reported.
-
-## Scenario 3 - Transactions
+## Scenario 2 - Transactions
 1. Navigate to the project's *tx* folder.
 2. Import model [OnlineBank.json](./tx/OnlineBank.json) into NoSQL Workbench for Amazon DynamoDB.
 3. Use NoSQL Workbench Visualizer to "commit" the model to your AWS account in *us-east-1*.
@@ -217,11 +188,50 @@ and integrity.  Clients can retry and ascertain the exact status of any
 transaction.
 
 
+---
+
+
+## Scenario 3 - Report Management
+
+![GSI: StatusDate-by-OwnerID](https://dynamodb-images.s3.amazonaws.com/img/reports_gsi.png)
+
+This is a view of the Global Secondary Index: **StatusDate-by-OwnerID**
+
+### Setup Steps
+1. Import model [report_mgmt.json](./reportmgmt/report_mgmt.json) into NoSQL Workbench for Amazon DynamoDB.
+2. Use NoSQL Workbench Visualizer to "commit" the model to your AWS account in *us-east-1*.
+
+*This table is created with Provisioned Capacity mode, with 5 read and 5 write units.
+You have 25 such units free across all your tables.  If you will be keeping the table around, 
+consider switching into On-Demand mode from the Capacity tab in your DynamoDB console.  
+See further pricing notes at the bottom.*
+
+### Report Management Demo
+1. cd into the [reportmgmt](./reportmgmt/) folder.
+2. View the model and example data.
+3. Run this script to update the status and date for one of the entries:
+```
+update_report_statusdate.sh 9D2B 9D2B#meta Pending#2019-10-05
+```
+   Note write throughput consumed - why did the secondary index consume 2 ?
+   
+3. Run this script to selectively Query the global secondary index retrieving
+   matches for a particular OwnerID and Status, and return in sort Date order.
+```
+query_gsi_by_owner_status_sortdate.sh Paola Pending
+```
+Note sorted result set and read throughput consumption reported.
+
+
+---
+
+
 ## Modeling Exercises
 To practice modeling DynamoDB tables using the NoSQL Workbench, 
 please try the design challenges at:
- 
- * [amazon-dynamodb-labs.com](https://amazon-dynamodb-labs.com/scenarios.html)
+
+ * [Ocean Surface Temperatures](./ocean/README.md)
+ * [amazon-dynamodb-labs.com/scenarios.html](https://amazon-dynamodb-labs.com/scenarios.html)
 
 
 ## Next Steps

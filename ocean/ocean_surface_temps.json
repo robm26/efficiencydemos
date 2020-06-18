@@ -1,0 +1,101 @@
+{
+  "ModelName": "ocean surface temps",
+  "ModelMetadata": {
+    "Author": "pnnaylor@",
+    "DateCreated": "May 26, 2020, 05:48 PM",
+    "DateLastModified": "Jun 18, 2020, 10:43 AM",
+    "Description": "Model supports an example for the data modeling session of dbCon 2020.",
+    "Version": "1.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "oceantemps",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "organization_number",
+          "AttributeType": "N"
+        },
+        "SortKey": {
+          "AttributeName": "device#detail",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "surface_temperature_kelvin",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "fault_indicated",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "ttl",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "install_longitude",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "install_latitude",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "hardware_model_revision",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "status",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "serviced_date",
+          "AttributeType": "S"
+        }
+      ],
+      "TableData": [
+        {
+          "organization_number": {
+            "N": "713"
+          },
+          "device#detail": {
+            "S": "00094#202005262106"
+          },
+          "surface_temperature_kelvin": {
+            "S": "293.55"
+          },
+          "fault_indicated": {
+            "BOOL": false
+          },
+          "ttl": {
+            "S": "1593224182"
+          },
+          "install_longitude": {
+            "N": "-28.614913"
+          },
+          "install_latitude": {
+            "N": "153.620450"
+          }
+        },
+        {
+          "organization_number": {
+            "N": "713"
+          },
+          "device#detail": {
+            "S": "00094#metadata"
+          },
+          "install_longitude": {
+            "N": "-28.614913"
+          },
+          "install_latitude": {
+            "N": "153.620450"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    }
+  ]
+}
