@@ -18,8 +18,6 @@ then
       echo Querying $TABLENAME for Partition Key $PK
 fi
 
-# echo Connecting to $ENDPOINTURL
-# echo Scanning $TABLENAME with a filter on $PRODUCT
 
 aws dynamodb query --region $REGION --endpoint-url $ENDPOINTURL \
     --table-name $TABLENAME \

@@ -11,9 +11,6 @@ ENDPOINTURL=https://dynamodb.$REGION.amazonaws.com
 INDEX=$ARG1
 
 
-# echo Connecting to $ENDPOINTURL
-# echo Scanning $TABLENAME
-
 aws dynamodb scan --region $REGION --endpoint-url $ENDPOINTURL \
     --table-name $TABLENAME \
     --index-name $INDEX \

@@ -6,8 +6,6 @@ TABLENAME=ShoppingCart
 # ENDPOINTURL=http://localhost:8000
 ENDPOINTURL=https://dynamodb.$REGION.amazonaws.com
 
-# echo Connecting to $ENDPOINTURL
-# echo Scanning $TABLENAME
 
 aws dynamodb scan --region $REGION --endpoint-url $ENDPOINTURL \
     --table-name $TABLENAME \

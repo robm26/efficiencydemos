@@ -26,8 +26,6 @@ fi
 
 NEWITEM='{"PK":{"S":"'$PK'"},"SK":{"S":"'$SK'"},"Qty":{"N":"15"}}'
 
-# echo Connecting to $ENDPOINTURL
-# echo Scanning $TABLENAME with a filter on $SK
 
 aws dynamodb delete-item --region $REGION --endpoint-url $ENDPOINTURL \
     --table-name $TABLENAME \
@@ -36,5 +34,3 @@ aws dynamodb delete-item --region $REGION --endpoint-url $ENDPOINTURL \
     --output json \
     --query '{"Consumed WCUs ":ConsumedCapacity}'
 
-#    --projection-expression '#a' \
-#    --expression-attribute-names '{ "#a": "'$RETURNATTR'" }'  \

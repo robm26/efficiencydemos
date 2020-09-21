@@ -43,16 +43,6 @@ else
 fi
 
 
-
-echo $CRFLAG : $CONSISTENCY
-echo $PROJECTIONEXPRESSION
-
-# PROJECTIONEXPRESSION='--projection-expression "#a" --expression-attribute-names  "{ \"#a\": \"DateOrdered\" }"  '
-
-
-# echo Connecting to $ENDPOINTURL
-# echo Scanning $TABLENAME with a filter on $SK
-
 aws dynamodb get-item --region $REGION --endpoint-url $ENDPOINTURL \
     --table-name $TABLENAME \
     --key '{"PK":{"S":"'$PK'"},"SK":{"S":"'$SK'"}}' \
@@ -62,6 +52,3 @@ aws dynamodb get-item --region $REGION --endpoint-url $ENDPOINTURL \
     --output json \
     --query '{"Item": Item,  "Consumed RCUs ":ConsumedCapacity.CapacityUnits}'
 
-
-#    --projection-expression '#a' \
-#    --expression-attribute-names '{ "#a": "'$RETURNATTR'" }'  \

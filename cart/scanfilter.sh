@@ -5,9 +5,7 @@ TABLENAME=ShoppingCart
 ENDPOINTURL=https://dynamodb.$REGION.amazonaws.com
 # ENDPOINTURL=http://localhost:8000
 
-
 ARG1="$1"
-
 
 PK=$ARG1
 
@@ -16,7 +14,6 @@ then
       PK="Cart1"
       echo Scanning $TABLENAME with a filter on $PK
 fi
-
 
 aws dynamodb scan --region $REGION --endpoint-url $ENDPOINTURL \
     --table-name $TABLENAME \

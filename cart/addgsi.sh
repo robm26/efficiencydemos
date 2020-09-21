@@ -16,9 +16,11 @@ aws dynamodb update-table --table-name "ShoppingCart" \
                  {\"AttributeName\":\"ProductName\",\"KeyType\":\"HASH\"}, \
                  {\"AttributeName\":\"Price\",\"KeyType\":\"RANGE\"} \
                  ], \
-        \"Projection\":{\"ProjectionType\":\"ALL\"}}}]" \
+             \"Projection\":{\"ProjectionType\":\"ALL\"}}}]" \
     --region $REGION \
     --endpoint-url $ENDPOINTURL \
     --output json --query '{"New Table":TableDescription.TableName, "Status   ":TableDescription.TableStatus }'
 
+
+aws dynamodb wait table-exists --table-name $TABLENAME --region $REGION --endpoint-url $ENDPOINTURL
 
