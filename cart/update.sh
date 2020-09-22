@@ -42,6 +42,7 @@ then
 fi
 
 
+
 aws dynamodb update-item --region $REGION --endpoint-url $ENDPOINTURL \
     --table-name $TABLENAME \
     --key '{"PK":{"S":"'$PK'"},"SK":{"S":"'$SK'"}}' \

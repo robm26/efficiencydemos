@@ -103,9 +103,9 @@ As you run each example, try and estimate the capacity you think will be consume
 | Put Item | ```put.sh``` <br/> *writes new item Cart7 Product700* |
 | UpdateItem | 1. ```update.sh Cart7 Product700 Price 22.33``` <br/> 2. ```update.sh Cart7 Product700 CustomerDescription MuchSmaller``` <br/> 3. ```update.sh Cart7 Product700 Price 44.55``` |
 | Add New GSI (ProductName + Price) | ```addgsi.sh``` <br/> Wait a couple minutes for **GSI-ProductPrice** to be created. |
-| UpdateItem GSI key attribute | ```update.sh Cart1 Product100 Price 12.34``` |
+| UpdateItem GSI key attribute | ```update.sh Cart1 Product100 Price 12``` |
 | UpdateItem non-GSI key attribute | ```update.sh Cart1 Product100 Qty 5``` |
-| UpdateItem with cost and non-GSI attribute | ```update.sh Customer "John Stiles" Address "100 Main Street"``` |
+| UpdateItem with cost and non-GSI attribute | ```update.sh Customer John Address 100MainStreet``` |
 | Scan a GSI (works the same as base table) | ```scangsi.sh GSI-ProductPrice``` |
 | Query a GSI (works the same as base table) | ```querygsi.sh GSI-ProductPrice Turnip``` |
 | Write to a GSI | *N/A <br/> you can only write to a base table!* |
