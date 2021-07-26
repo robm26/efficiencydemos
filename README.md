@@ -18,7 +18,7 @@ and get immediate visibility into the cost and effectiveness of your calls.
  * A bash command-line environment such as Mac Terminal or Windows 10 bash shell
  * The [NoSQL Workbench for Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html)
  
- *If you do not have an AWS account, you can run [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html) on your laptop instead.*
+ *If you do not have an AWS account, you can run [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html) on port 8000 of your laptop instead.  Within each script, locate and remove the pound comment in the line with: # ENDPOINTURL=http://localhost:8000*
  
  
 ## Consumed Capacity
